@@ -18,6 +18,7 @@ dependencies {
 }
 
 intellij {
+    version = "2019.3.4"
     type = "PY"
 }
 
@@ -29,7 +30,7 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
+tasks.getByName<PatchPluginXmlTask>("patchPluginXml") {
     changeNotes(
         """
       Add change notes here.<br>

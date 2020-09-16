@@ -2,7 +2,6 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.command.WriteCommandAction
-import com.intellij.refactoring.suggested.startOffset
 
 class AddTypeAnnotationAction : AnAction() {
     override fun actionPerformed(event: AnActionEvent) {
@@ -15,7 +14,7 @@ class AddTypeAnnotationAction : AnAction() {
         val element = file.findElementAt(offset) ?: return
 
         WriteCommandAction.runWriteCommandAction(project) {
-            document.insertString(element.startOffset + element.textLength, ": int")
+            document.insertString(element.textRange.endOffset - 1, ": int ")
         }
     }
 
