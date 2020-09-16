@@ -14,7 +14,7 @@ class AddTypeAnnotationAction : AnAction() {
         val element = file.findElementAt(offset) ?: return
 
         WriteCommandAction.runWriteCommandAction(project) {
-            document.insertString(element.textRange.endOffset - 1, ": int ")
+            document.insertString(element.textRange.endOffset - 1, ": int")
         }
     }
 
