@@ -1,0 +1,25 @@
+<idea-plugin>
+    <id>org.example.PythonTypeAnnotationPlugin</id>
+    <name>PythonTypeAnnotationPlugin</name>
+    <vendor >Example</vendor>
+
+    <description>Add Python stub type annotation to variables and function parameters.</description>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends optional="true">com.intellij.modules.python</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+
+
+        <action id="AddTypeAnnotationAction" class="AddTypeAnnotationAction" text="Type annotation action"
+                description="Stub type annotation">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH" second-keystroke="ctrl P"/>
+        </action>
+    </actions>
+</idea-plugin>
