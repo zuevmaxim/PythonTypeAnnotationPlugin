@@ -18,7 +18,7 @@ dependencies {
 }
 
 intellij {
-    version = "2019.3.4"
+    version = "2019.2.3"
     type = "PY"
 }
 
