@@ -1,6 +1,4 @@
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -9,14 +7,26 @@ import com.intellij.psi.PsiFile
 import com.jetbrains.python.psi.PyNamedParameter
 import com.jetbrains.python.psi.PyTargetExpression
 
-class AddTypeAnnotationAction : AnAction() {
-    override fun actionPerformed(event: AnActionEvent) {
-        val editor = event.getData(CommonDataKeys.EDITOR) ?: return
-        val file = event.getData(CommonDataKeys.PSI_FILE) ?: return
-        val project = event.getData(CommonDataKeys.PROJECT) ?: return
+class AddTypeAnnotationAction : IntentionAction {
+    override fun startInWriteAction() = false
+    override fun getText() = "Add 'int' type annotation."
+    override fun getFamilyName() = "MyIntention"
+
+    override fun isAvailable(project: Project, editor: Editor?, file: PsiFile?): Boolean {
+        if (editor == null || file == null) {
+            return false
+        }
+        val offset = editor.caretModel.offset
+        if (!shouldAddAnnotationAtOffset(file, offset) && !shouldAddAnnotationAtOffset(file, offset - 1)) {
+            return false
+        }
+        return true
+    }
+
+    override fun invoke(project: Project, editor: Editor?, file: PsiFile?) {
+        if (editor == null || file == null) return
 
         val caretOffset = editor.caretModel.currentCaret.offset
-
         val possibleOffsets = listOf(caretOffset, caretOffset - 1)
         for (offset in possibleOffsets) {
             if (shouldAddAnnotationAtOffset(file, offset)) {

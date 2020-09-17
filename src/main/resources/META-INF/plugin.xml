@@ -10,14 +10,13 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <intentionAction>
+            <className>AddTypeAnnotationAction</className>
+            <descriptionDirectoryName>intentionDescriptions.AddTypeAnnotationAction</descriptionDirectoryName>
+        </intentionAction>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="AddTypeAnnotationAction" class="AddTypeAnnotationAction" text="Type Annotation Action"
-                description="Stub type annotation">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl BACK_SLASH" second-keystroke="ctrl P"/>
-        </action>
     </actions>
 </idea-plugin>
